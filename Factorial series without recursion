@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+unsigned long long factorial(unsigned int n) {
+    unsigned long long result = 1;
+    
+    for (unsigned int i = 1; i <= n; i++) {
+        result *= i;
+    }
+    
+    return result;
+}
+
+int main() {
+    unsigned int number;
+    
+    printf("Enter a positive integer: ");
+    scanf("%u", &number);
+    
+    unsigned long long result = factorial(number);
+    
+    printf("The factorial of %u is %llu\n", number, result);
+    
+    return 0;
+}
+C:\Users\sanja\OneDrive\Pictures\Screenshots\22.png
