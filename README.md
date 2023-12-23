@@ -51,10 +51,15 @@ Day 3 – Singly Linked List
 
 3.1-	Implement SLL with following operations
 Insert(Beg,Mid,End)
+
 Delete(Beg,Mid,End)
+
 Display
+
 Search
+
 Sort
+
 Find Max and Min
 
 3.2-	To determine whether a given singly linked list is a palindrome
