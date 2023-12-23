@@ -1,7 +1,6 @@
 #include <stdio.h>
 
 int main() {
-    // Declare an array
     int array[] = {5, 2, 9, 1, 7};
 
     // Determine the size of the array
@@ -22,4 +21,3 @@ int main() {
 
     return 0;
 }
-C:\Users\sanja\OneDrive\Pictures\Screenshots\8.png
