@@ -1,7 +1,7 @@
 //Addition of two Matrics
 #include<stdio.h>
 int main(){
-	printf("Name: Philip Gracian Sanova\nReg no: 192324023\n");
+	printf("Name: Sanjay vignesh R\nReg no: 192324061\n");
 	int r,c,i,j;
 	printf("Enter the rows and columns of the Matrices:");
 	scanf("%d %d",&r,&c);
