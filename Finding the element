@@ -28,4 +28,3 @@ int main() {
     printf("Value is not found.\n");
     return 0;
 }
-C:\Users\sanja\OneDrive\Pictures\Screenshots\67.png
