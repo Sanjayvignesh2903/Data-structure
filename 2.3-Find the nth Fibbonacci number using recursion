@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+int calculateFibonacci(int n) {
+    if (n <= 1) {
+        return n; // Base case: F(0) = 0, F(1) = 1
+    } else {
+        return calculateFibonacci(n - 1) + calculateFibonacci(n - 2);
+    }
+}
+
+int main() {
+    int n;
+
+    printf("Enter the value of n: ");
+    scanf("%d", &n);
+
+    if (n < 0) {
+        printf("Fibonacci is undefined for negative numbers.\n");
+    } else {
+        int fibonacciNumber = calculateFibonacci(n);
+        printf("The %dth Fibonacci number is: %d\n", n, fibonacciNumber);
+    }
+
+    return 0;
+}
