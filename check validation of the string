@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <string.h>
+
+int isStringValid(const char *str) {
+    // Check if the string is not empty
+    if (str != NULL && str[0] != '\0') {
+        return 1; // Valid
+    } else {
+        return 0; // Invalid
+    }
+}
+
+int main() {
+    char inputString[100];
+
+    // Get user input
+    printf("Enter a string: ");
+    fgets(inputString, sizeof(inputString), stdin);
+
+    // Remove newline character if present
+    if (inputString[strlen(inputString) - 1] == '\n') {
+        inputString[strlen(inputString) - 1] = '\0';
+    }
+
+    // Check if the string is valid
+    if (isStringValid(inputString)) {
+        printf("The entered string is valid: %s\n", inputString);
+    } else {
+        printf("The entered string is invalid.\n");
+    }
+
+    return 0;
+}
