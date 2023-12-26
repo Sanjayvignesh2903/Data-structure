@@ -71,3 +71,32 @@ Find Max and Min
 3.5-	Intersect SLL
 	
 3.6-Reverse - SLL
+
+Day 4
+1.Implement DLL with following operations
+
+Insert(Beg,Mid,End)
+
+Delete(Beg,Mid,End)
+
+Display
+
+Search
+
+Sort
+
+Find Max and Min
+
+2. Implement Singly CLL with following operations
+ 
+Insert(Beg,Mid,End)
+
+Delete(Beg,Mid,End)
+
+Display
+
+Search
+
+Sort
+
+Find Max and Min
