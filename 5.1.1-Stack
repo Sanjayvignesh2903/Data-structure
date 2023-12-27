@@ -1,0 +1,58 @@
+#include <stdio.h>
+
+#define MAX_SIZE 100
+
+// Define the stack structure
+struct Stack {
+    int arr[MAX_SIZE];
+    int top;
+};
+
+// Function to initialize the stack
+void initializeStack(struct Stack* stack) {
+    stack->top = -1;
+}
+
+// Function to push an element onto the stack
+void push(struct Stack* stack, int value) {
+    // Check for stack overflow
+    if (stack->top == MAX_SIZE - 1) {
+        printf("Stack Overflow: Cannot push element onto the stack.\n");
+        return;
+    }
+
+    // Increment the top and add the element to the stack
+    stack->arr[++stack->top] = value;
+}
+
+// Function to display the elements of the stack
+void displayStack(struct Stack* stack) {
+    if (stack->top == -1) {
+        printf("Stack is empty.\n");
+        return;
+    }
+
+    printf("Stack elements: ");
+    for (int i = 0; i <= stack->top; ++i) {
+        printf("%d ", stack->arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    // Create a stack
+    struct Stack myStack;
+
+    // Initialize the stack
+    initializeStack(&myStack);
+
+    // Push elements onto the stack
+    push(&myStack, 10);
+    push(&myStack, 20);
+    push(&myStack, 30);
+
+    // Display the stack elements
+    displayStack(&myStack);
+
+    return 0;
+}
