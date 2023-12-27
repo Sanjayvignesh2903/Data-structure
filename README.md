@@ -128,7 +128,7 @@ Display( )
 
 Peek( )
 
-3.Consider 2 stacks, add bottom most element and top most element print the value
+3.Consider 2 stacks, add bottom most element and top most element print the value.
 
 4. Given a stack, delete the middle element of the stack without using any additional data structure.
 Middle element:- floor((size_of_stack+1)/2) (1-based indexing) from bottom of the stack.
