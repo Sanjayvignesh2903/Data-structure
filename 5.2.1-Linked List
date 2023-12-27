@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Stack {
+    struct Node* top;
+};
+void push(struct Stack* stack, int data) {
+
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    if (newNode == NULL) {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(EXIT_FAILURE);
+    }
+
+    newNode->data = data;
+    newNode->next = stack->top;
+
+    stack->top = newNode;
+
+    printf("Pushed %d onto the stack\n", data);
+}
+
+void printList(struct Node* head) {
+    printf("Linked List (Stack): ");
+    while (head != NULL) {
+        printf("%d -> ", head->data);
+        head = head->next;
+    }
+    printf("NULL\n");
+}
+
+int main() {
+    struct Stack stack;
+    stack.top = NULL;
+
+    push(&stack, 1);
+    push(&stack, 2);
+    push(&stack, 3);
+
+    printList(stack.top);
+
+    return 0;
+}
