@@ -1,0 +1,77 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX_SIZE 100
+
+// Stack structure
+typedef struct {
+    int arr[MAX_SIZE];
+    int top;
+} Stack;
+
+// Initialize an empty stack
+void initStack(Stack *stack) {
+    stack->top = -1;
+}
+
+// Check if the stack is empty
+int isEmpty(Stack *stack) {
+    return stack->top == -1;
+}
+
+// Check if the stack is full
+int isFull(Stack *stack) {
+    return stack->top == MAX_SIZE - 1;
+}
+
+// Push an element onto the stack
+void push(Stack *stack, int value) {
+    if (isFull(stack)) {
+        printf("Stack overflow\n");
+        return;
+    }
+    stack->arr[++stack->top] = value;
+}
+
+// Pop an element from the stack
+int pop(Stack *stack) {
+    if (isEmpty(stack)) {
+        printf("Stack underflow\n");
+        return -1; // Return a special value to indicate underflow
+    }
+    return stack->arr[stack->top--];
+}
+
+// Peek at the top element of the stack
+int peek(Stack *stack) {
+    if (isEmpty(stack)) {
+        printf("Stack is empty\n");
+        return -1; // Return a special value to indicate empty stack
+    }
+    return stack->arr[stack->top];
+}
+
+int main() {
+    Stack stack;
+    initStack(&stack);
+
+    // Push elements onto the stack
+    push(&stack, 10);
+    push(&stack, 20);
+    push(&stack, 30);
+
+    // Peek at the top element
+    int topElement = peek(&stack);
+    if (topElement != -1) {
+        printf("Top element: %d\n", topElement);
+    }
+
+    // Pop elements from the stack
+    int poppedElement1 = pop(&stack);
+    int poppedElement2 = pop(&stack);
+
+    // Display popped elements
+    printf("Popped elements: %d, %d\n", poppedElement1, poppedElement2);
+
+    return 0;
+}
