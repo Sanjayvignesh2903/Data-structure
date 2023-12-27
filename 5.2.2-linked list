@@ -1,0 +1,78 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Stack {
+    struct Node* top;
+};
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    if (newNode == NULL) {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(EXIT_FAILURE);
+    }
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+struct Stack* createStack() {
+    struct Stack* stack = (struct Stack*)malloc(sizeof(struct Stack));
+    if (stack == NULL) {
+        fprintf(stderr, "Memory allocation failed\n");
+        exit(EXIT_FAILURE);
+    }
+    stack->top = NULL;
+    return stack;
+}
+
+void push(struct Stack* stack, int data) {
+    struct Node* newNode = createNode(data);
+    newNode->next = stack->top;
+    stack->top = newNode;
+}
+
+struct Node* pop(struct Stack* stack) {
+    if (stack->top == NULL) {
+        fprintf(stderr, "Stack underflow\n");
+        exit(EXIT_FAILURE);
+    }
+    struct Node* poppedNode = stack->top;
+    stack->top = stack->top->next;
+    poppedNode->next = NULL; 
+    return poppedNode;
+}
+
+void displayLinkedList(struct Node* head) {
+    while (head != NULL) {
+        printf("%d -> ", head->data);
+        head = head->next;
+    }
+    printf("NULL\n");
+}
+
+int main() {
+    struct Stack* stack = createStack();
+
+    push(stack, 1);
+    push(stack, 2);
+    push(stack, 3);
+
+    struct Node* poppedNode1 = pop(stack);
+    struct Node* poppedNode2 = pop(stack);
+    printf("Popped Node 1: %d\n", poppedNode1->data);
+    printf("Popped Node 2: %d\n", poppedNode2->data);
+    free(poppedNode1);
+    free(poppedNode2);
+
+    printf("Remaining elements in the stack: ");
+    displayLinkedList(stack->top);
+
+    free(stack);
+
+    return 0;
+}
