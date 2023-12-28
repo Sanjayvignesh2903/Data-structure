@@ -1,0 +1,91 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void insert(struct Node** head, int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    
+    if (*head == NULL) {
+        *head = newNode;
+        newNode->next = newNode;
+        return;
+    }
+    
+    // Find the last node in the list
+    struct Node* last = *head;
+    while (last->next != *head) {
+        last = last->next;
+    }
+    
+    newNode->next = *head;
+    last->next = newNode;
+    *head = newNode;
+}
+
+void sort(struct Node** head) {
+    struct Node* current = *head;
+    struct Node* index = NULL;
+    int temp;
+    
+    if (*head == NULL) {
+        return;
+    }
+    else {
+        do {
+            index = current->next;
+            
+            while (index != *head) {
+                if (current->data > index->data) {
+                    temp = current->data;
+                    current->data = index->data;
+                    index->data = temp;
+                }
+                index = index->next;
+            }
+            
+            current = current->next;
+        } while (current->next != *head);
+    }
+}
+
+void display(struct Node* head) {
+    struct Node* temp = head;
+    
+    if (head == NULL) {
+        printf("List is empty.\n");
+        return;
+    }
+    
+    do {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    } while (temp != head);
+    
+    printf("\n");
+}
+
+int main() {
+    struct Node* head = NULL;
+    
+    // Insert nodes into the list
+    insert(&head, 5);
+    insert(&head, 3);
+    insert(&head, 8);
+    insert(&head, 1);
+    insert(&head, 6);
+    
+    printf("Original List: ");
+    display(head);
+    
+    sort(&head);
+    
+    printf("Sorted List: ");
+    display(head);
+    
+    return 0;
+}
