@@ -1,0 +1,44 @@
+#include <stdio.h>
+#include <Windows.h>
+void displayArray(int arr[], int size) {
+    printf("Array elements: ");
+    for (int i = 0; i < size; ++i) {
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int main() {
+    int myArray[] = {5, 3, 1, 4, 2};
+    int arraySize = sizeof(myArray) / sizeof(myArray[0]);
+
+    HMODULE hDLL = LoadLibrary("ArraySort.dll");
+    if (hDLL == NULL) {
+        fprintf(stderr, "Failed to load DLL.\n");
+        return 1;
+    }
+
+    void (*bubbleSortAscFunc)(int[], int) = (void (*)(int[], int))GetProcAddress(hDLL, "bubbleSortAsc");
+    void (*bubbleSortDescFunc)(int[], int) = (void (*)(int[], int))GetProcAddress(hDLL, "bubbleSortDesc");
+
+    if (bubbleSortAscFunc == NULL || bubbleSortDescFunc == NULL) {
+        fprintf(stderr, "Failed to get function pointers.\n");
+        FreeLibrary(hDLL);
+        return 1;
+    }
+
+    printf("Original ");
+    displayArray(myArray, arraySize);
+
+    bubbleSortAscFunc(myArray, arraySize);
+    printf("Sorted (Ascending) ");
+    displayArray(myArray, arraySize);
+
+    bubbleSortDescFunc(myArray, arraySize);
+    printf("Sorted (Descending) ");
+    displayArray(myArray, arraySize);
+
+    FreeLibrary(hDLL);
+
+    return 0;
+}
