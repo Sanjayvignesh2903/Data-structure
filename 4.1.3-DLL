@@ -1,1 +1,27 @@
+#include <stdio.h>
+#include <Windows.h>
+
+int main() {
+    int myArray[] = {1, 2, 3, 4, 5};
+    int arraySize = sizeof(myArray) / sizeof(myArray[0]);
+
+    HMODULE hDLL = LoadLibrary("ArrayDisplay.dll");
+    if (hDLL == NULL) {
+        fprintf(stderr, "Failed to load DLL.\n");
+        return 1;
+    }
+
+    void (*displayArrayFunc)(int[], int) = (void (*)(int[], int))GetProcAddress(hDLL, "displayArray");
+    if (displayArrayFunc == NULL) {
+        fprintf(stderr, "Failed to get function pointer.\n");
+        FreeLibrary(hDLL);
+        return 1;
+    }
+
+    displayArrayFunc(myArray, arraySize);
+
+    FreeLibrary(hDLL);
+
+    return 0;
+}
 
