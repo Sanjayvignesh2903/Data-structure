@@ -1,0 +1,64 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* head = NULL;
+int minimum = INT_MAX;
+int maximum = INT_MIN;
+
+void insert(int value) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = value;
+    newNode->next = NULL;
+
+    if (head == NULL) {
+        head = newNode;
+        head->next = head;
+    } else {
+        struct Node* temp = head;
+        while (temp->next != head) {
+            temp = temp->next;
+        }
+        temp->next = newNode;
+        newNode->next = head;
+    }
+
+    if (value < minimum) {
+        minimum = value;
+    }
+    if (value > maximum) {
+        maximum = value;
+    }
+}
+
+void findMinimum() {
+    if (head == NULL) {
+        printf("List is empty.\n");
+    } else {
+        printf("Minimum value in the list: %d\n", minimum);
+    }
+}
+
+void findMaximum() {
+    if (head == NULL) {
+        printf("List is empty.\n");
+    } else {
+        printf("Maximum value in the list: %d\n", maximum);
+    }
+}
+
+int main() {
+    insert(5);
+    insert(10);
+    insert(3);
+    insert(8);
+
+    findMinimum();
+    findMaximum();
+
+    return 0;
+}
