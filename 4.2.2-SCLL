@@ -1,0 +1,143 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+void insertAtBeginning(struct Node** head, int data) {
+  
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+
+    if (*head == NULL) {
+        *head = newNode;
+        newNode->next = *head;
+    }
+    else {
+        struct Node* last = *head;
+        while (last->next != *head) {
+            last = last->next;
+        }
+
+        newNode->next = *head;
+
+        last->next = newNode;
+
+        *head = newNode;
+    }
+}
+
+void deleteFromBeginning(struct Node** head) {
+    
+    if (*head == NULL) {
+        return;
+    }
+
+    if ((*head)->next == *head) {
+        free(*head);
+        *head = NULL;
+        return;
+    }
+
+    struct Node* last = *head;
+    while (last->next != *head) {
+        last = last->next;
+    }
+
+    last->next = (*head)->next;
+
+    struct Node* temp = *head;
+    *head = (*head)->next;
+    free(temp);
+}
+void deleteFromMiddle(struct Node** head, int position) {
+
+    if (*head == NULL) {
+        return;
+    }
+    if (position == 0) {
+        deleteFromBeginning(head);
+        return;
+    }
+
+    struct Node* current = *head;
+    struct Node* previous = NULL;
+    int count = 0;
+
+    while (current->next != *head && count < position) {
+        previous = current;
+        current = current->next;
+        count++;
+    }
+
+    if (count != position) {
+        return;
+    }
+    previous->next = current->next;
+
+    free(current);
+}
+
+void deleteFromEnd(struct Node** head) {
+  
+    if (*head == NULL) {
+        return;
+    }
+
+    if ((*head)->next == *head) {
+        free(*head);
+        *head = NULL;
+        return;
+    }
+    struct Node* secondLast = *head;
+    while (secondLast->next->next != *head) {
+        secondLast = secondLast->next;
+    }
+    struct Node* last = secondLast->next;
+    secondLast->next = *head;
+    free(last);
+}
+void printList(struct Node* head) {
+    
+    if (head == NULL) {
+        return;
+    }
+
+    struct Node* current = head;
+    do {
+        printf("%d ", current->data);
+        current = current->next;
+    } while (current != head);
+}
+
+int main() {
+    struct Node* head = NULL;
+    insertAtBeginning(&head, 3);
+    insertAtBeginning(&head, 2);
+    insertAtBeginning(&head, 1);
+
+    printf("Initial List: ");
+    printList(head);
+    printf("\n");
+
+    deleteFromBeginning(&head);
+
+    printf("List after deleting from the beginning: ");
+    printList(head);
+    printf("\n");
+
+    deleteFromMiddle(&head, 1);
+
+    printf("List after deleting from the middle: ");
+    printList(head);
+    printf("\n");
+    deleteFromEnd(&head);
+
+    printf("Final List after deleting from the end: ");
+    printList(head);
+    printf("\n");
+
+    return 0;
+}
