@@ -98,7 +98,7 @@ void rearpeek(int a[]){
 }
 
 int main() {
-    printf("Name: Philip Gracian Sanova\nReg no: 192324023\n");
+    printf("Name: Sanjay vignesh.R\nReg no: 192324061\n");
 	rear=front=-1;
     printf("Enter queue elements: ");
     char string[MAX_SIZE];
