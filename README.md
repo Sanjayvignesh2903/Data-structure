@@ -202,6 +202,14 @@ Rear( )
 
 6. Implement Queue using two Stacks
 
+Day 8:
+
+1.Implement Binary tree
+
+2. Implement Binary Search Tree and perform Insertion and Deletion
+   
+3. Create Binary Search Tree with Tree Traversal (Inorder, Preorder, Postorder and Level order)
+
 Day 9
    
 Implement a C Program for AVL tree and perform Insertion and Deletion of Nodes
