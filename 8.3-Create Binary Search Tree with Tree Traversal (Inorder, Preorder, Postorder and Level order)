@@ -1,98 +1,107 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct Node {
+struct node {
     int data;
-    struct Node *next;
+    struct node *left;
+    struct node *right;
 };
 
-struct Node *front = NULL;
-struct Node *rear = NULL;
-
-void Enqueue(int data) {
-    struct Node *newNode = (struct Node *)malloc(sizeof(struct Node));
+struct node* createNode(int data) {
+    struct node* newNode = (struct node*)malloc(sizeof(struct node));
     newNode->data = data;
-
-    if (front == NULL) {
-        front = rear = newNode;
-        rear->next = front;  
-    } else {
-        rear->next = newNode;
-        rear = newNode;
-        rear->next = front;  
-    }
-    printf("%d enqueued to queue\n", data);
+    newNode->left = NULL;
+    newNode->right = NULL;
+    return newNode;
 }
 
-int Dequeue() {
-    if (front == NULL) {
-        printf("Queue is empty\n");
-        return -1;
+struct node* insert(struct node* root, int data) {
+    if (root == NULL) {
+        return createNode(data);
     }
 
-    int data = front->data;
-
-    if (front == rear) {
-        free(front);
-        front = rear = NULL;
-    } else {
-        struct Node *temp = front;
-        front = front->next;
-        rear->next = front; 
-        free(temp);
+    if (data < root->data) {
+        root->left = insert(root->left, data);
+    } else if (data > root->data) {
+        root->right = insert(root->right, data);
     }
 
-    printf("%d dequeued from queue\n", data);
-    return data;
+    return root;
 }
 
-void Display() {
-    if (front == NULL) {
-        printf("Queue is empty\n");
+// Traversal functions
+void inorderTraversal(struct node* root) {
+    if (root != NULL) {
+        inorderTraversal(root->left);
+        printf("%d ", root->data);
+        inorderTraversal(root->right);
+    }
+}
+
+void preorderTraversal(struct node* root) {
+    if (root != NULL) {
+        printf("%d ", root->data);
+        preorderTraversal(root->left);
+        preorderTraversal(root->right);
+    }
+}
+
+void postorderTraversal(struct node* root) {
+    if (root != NULL) {
+        postorderTraversal(root->left);
+        postorderTraversal(root->right);
+        printf("%d ", root->data);
+    }
+}
+
+void levelorderTraversal(struct node* root) {
+    if (root == NULL) {
         return;
     }
 
-    struct Node *temp = front;
-    printf("Queue elements: ");
-    do {
-        printf("%d ", temp->data);
-        temp = temp->next;
-    } while (temp != front);
-    printf("\n");
-}
+    struct node* queue[100];  // Assuming a maximum of 100 nodes
+    int front = 0, rear = -1;
+    queue[++rear] = root;
 
-int Front() {
-    if (front == NULL) {
-        printf("Queue is empty\n");
-        return -1;
+    while (front <= rear) {
+        struct node* current = queue[front++];
+        printf("%d ", current->data);
+
+        if (current->left != NULL) {
+            queue[++rear] = current->left;
+        }
+        if (current->right != NULL) {
+            queue[++rear] = current->right;
+        }
     }
-    return front->data;
-}
-
-
-
-int Rear() {
-    if (rear == NULL) {
-        printf("Queue is empty\n");
-        return -1;
-    }
-    return rear->data;
 }
 
 int main() {
-	
-   
-    Enqueue(10);
-    Enqueue(20);
-    Enqueue(30);
+    struct node* root = NULL;
 
-    Display();  
+    root = insert(root, 50);
+    insert(root, 30);
+    insert(root, 20);
+    insert(root, 40);
+    insert(root, 70);
+    insert(root, 60);
+    insert(root, 80);
 
-    printf("Front element: %d\n", Front());  
-    printf("Rear element: %d\n", Rear());   
+    printf("Inorder traversal: ");
+    inorderTraversal(root);
+    printf("\n");
 
-    Dequeue();
-    Display();  
+    printf("Preorder traversal: ");
+    preorderTraversal(root);
+    printf("\n");
+
+    printf("Postorder traversal: ");
+    postorderTraversal(root);
+    printf("\n");
+
+    printf("Level order traversal: ");
+    levelorderTraversal(root);
+    printf("\n");
 
     return 0;
 }
