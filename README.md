@@ -143,3 +143,9 @@ Day 6
 Day 9
    
 Implement a C Program for AVL tree and perform Insertion and Deletion of Nodes
+
+Day 10
+
+1. Implement a C Program for Red Black tree and perform Insertion and Deletion of Nodes
+
+2. Implement a C Program for Splay tree tree and perform Insertion and Deletion of Nodes
