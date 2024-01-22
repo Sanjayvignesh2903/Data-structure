@@ -51,7 +51,7 @@ void printGraph(struct Graph* graph) {
 }
 
 int main() {
-	printf("Name: jeevitha\nReg no:192324020\n");
+	printf("Name: Sanjay vignesh.R\nReg no:192324061\n");
 	int vertices = 6;
     struct Graph* graph = createGraph(vertices);
 
