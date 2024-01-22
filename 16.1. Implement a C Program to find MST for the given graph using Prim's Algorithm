@@ -45,7 +45,7 @@ void primMST(int graph[V][V]) {
 }
 
 int main() {
-    printf("Name: Jeevitha\nReg no: 192324020\n");
+    printf("Name: Sanjay vignesh.R\nReg no: 192324061\n");
 
     int graph[V][V] = {{1, 2, 3, 6, 2},
                        {0, 1, 4, 8, 5},
