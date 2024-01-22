@@ -36,7 +36,7 @@ void print(struct Graph *graph){
 }
 
 int main() {
-	printf("Name: jeevitha\nReg no: 192324020");
+	printf("Name: Sanjay vignesh.R\nReg no: 192324061");
 	struct Graph graph;
 	createMatrix(&graph,5);
 	insertVertices(&graph,1,2);
